@@ -32,7 +32,9 @@
 	        bottomCls: 		'dialog-bottom',//底部类名
 	        buttonCls: 		'dialog-button',//按钮类名
 	        tipCls: 		'dialog-tip',//提示类名
-	        bgClose: 		true,//点击背景关闭 
+	        unselectCls: 	'unselect', 
+	        bgClose: 		true,//点击背景关闭
+	        drag: 			true,//是否可以拖拽 
 	        width: 			360,//宽度
 	        height: 		0,//高度
 	        top: 			150,//顶部距离
@@ -88,6 +90,9 @@
 	        //根据当前宽度设置左边距使之居中
 	        var _margin = (0 - $(conf.con).width()*0.5) + 'px';
 	        $(conf.con).css('margin-left', _margin);
+	        if (conf.drag) {
+	        	_drag();
+	        }
 	        return api;
 	    }
 	    /**
@@ -177,7 +182,7 @@
 	        }
 	        //html属性部分的字符串
 	        var _attr = {
-	        	'class': conf.buttonCls + '_' + _countBtn + ' ' + _dSet.cls,
+	        	'class': conf.buttonCls + '_' + _countBtn + ' ' + _dSet.cls
 	        };
 	        var _id = '';
 	        if (_dSet.id != '') {
@@ -358,7 +363,10 @@
 			    p_callback.call(this);
 		    } else {
 		    	if (conf.height == 0) {
-		    		$(conf.con).css('height', 'auto');
+		    		_temp = $(conf.con).clone()
+		    			.appendTo($(conf.con).parent()).css('height', 'auto');
+		    		conf.height = _temp.height();
+		    		_temp.detach();
 		    	}
 		    	$(conf.con).animate({
 		    		width: _num2css(conf.width, 'width'),
@@ -388,6 +396,45 @@
 				_rtn = p_isnum ? undefined : 'auto';
 			}
 			return _rtn;
+		}
+		//添加拖拽事件
+		function _drag () {
+			var _isDown = false;
+			var _clickPos = {
+				'x': 0,
+				'y': 0
+			};
+			var _showPos = {
+				'x': 0,
+				'y': 0	
+			};
+			var _$dialog = $(conf.con);
+			_$dialog.find('.' + conf.titleCls).css('cursor', 'move')
+				.mouseup(function () {
+					_isDown = false;
+					_showPos = {
+						'x': 0,
+						'y': 0	
+					};
+					_$dialog.removeClass(conf.unselectCls);
+				}).mousedown(function (p_e) {
+					_isDown = true;
+					_clickPos.x = p_e.pageX;
+					_clickPos.y = p_e.pageY;
+					_showPos.x = _$dialog.css('left').split('px')[0] - 0;
+					_showPos.y = _$dialog.css('top').split('px')[0] - 0;
+					_$dialog.addClass(conf.unselectCls);
+				});
+			$('body').mousemove(function (p_e) {
+				if (_lock) { return; }
+				if (_isDown) {
+					_$dialog.css({
+						'left': p_e.pageX - _clickPos.x + _showPos.x + 'px',
+						'top': p_e.pageY - _clickPos.y + _showPos.y + 'px'
+					});
+				}
+				p_e.originalEvent.preventDefault();
+			});
 		}
 	};
 })();

@@ -1,5 +1,7 @@
 body{position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 	overflow: hidden;}
+.unselect{user-select: none; -webkit-user-select: none;
+	-moz-user-select: none; -o-user-select: none; -ms-user-select: none;}
 .dialog{background: #222; border: 1px solid #000; color: #CCC; padding-bottom: 5px;}
 	.dialog-title{height: 18px; margin: 2px; padding: 5px; font-size: 16px; 
 		background: #333;}
@@ -8,15 +10,15 @@ body{position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 			.dialog-title a:hover{background: #888;}
 	.dialog-content{padding: 5px 10px;}
 		.dialog-bar{font-size: 12px;}
-			.dialog-bar textarea{display: block; width: 99%; height: 36px; line-height: 18px;
+			.dialog-bar textarea{display: block; width: 99%; height: 36px; 
+				line-height: 18px; font-size: 12px;
 				border: 0; outline: none; resize: none; background: #CCC; color: #222;}
 	.dialog-bottom{padding: 5px 10px; text-align: right;}
 		.dialog-tip{display: inline-block; float: left; width: 50%; height: 14px; 
 			padding: 4px 5px; text-align: left;}
 		.dialog-button{width: 60px; height: 14px; padding: 4px 2%;
 			margin-left: 5px; font-size: 12px; text-align: center; cursor: pointer;
-			background: #444; user-select: none; -webkit-user-select: none;
-			-moz-user-select: none; -o-user-select: none; -ms-user-select: none;}
+			background: #444;}
 			a.dialog-button, a.dialog-button:link,
 			a.dialog-button:visited{color: #CCC;} 
 			a.dialog-button:hover{color: #FFF; background: #666;}
