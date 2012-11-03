@@ -15,10 +15,10 @@
 	size - 设置尺寸
 
 ###Example
->var dia = $.dialog().init().title('标题').content('内容')；
->dia.button({<br/>
->	name: '按钮1',<br/>
->	cls: 'className',<br/>
->	id: 'idSelect',<br/>
->	events: function () {alert('按钮1被点了')；}<br/>
->}).show().size(200, 0, 100, 0.5, 1000);
+`var dia = $.dialog().init().title('标题').content('内容')；
+dia.button({
+	name: '按钮1',
+	cls: 'className',
+	id: 'idSelect',
+	events: function () {alert('按钮1被点了')；}
+}).show().size(200, 0, 100, 0.5, 1000);`
