@@ -1,6 +1,6 @@
-##基于jQuery的一个对话框插件 - dialog
+## 基于jQuery的一个对话框插件 - dialog
 
-###API
+### API
 - init - 初始化
 - title - 设置标题
 - content - 设置内容
@@ -14,11 +14,14 @@
 - unlock - 解锁对话框
 - size - 设置尺寸
 
-###Example
-	var dia = $.dialog().init().title('标题').content('内容')；
-	dia.button({
-		name: '按钮1',
-		cls: 'className',
-		id: 'idSelect',
-		events: function () {alert('按钮1被点了')；}
-	}).show().size(200, 0, 100, 0.5, 1000);
+### Example
+
+```js
+var dia = $.dialog().init().title('标题').content('内容');
+dia.button({
+	name: '按钮1',
+	cls: 'className',
+	id: 'idSelect',
+	events: function () {alert('按钮1被点了')；}
+}).show().size(200, 0, 100, 0.5, 1000);
+```
