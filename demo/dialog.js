@@ -32,7 +32,8 @@
 	        bottomCls: 		'dialog-bottom',//底部类名
 	        buttonCls: 		'dialog-button',//按钮类名
 	        tipCls: 		'dialog-tip',//提示类名
-	        unselectCls: 	'unselect', 
+	        unselectCls: 	'unselect',
+	        closeText: 		'×',//关闭按钮字符
 	        bgClose: 		true,//点击背景关闭
 	        drag: 			true,//是否可以拖拽
 	        fix: 			true,//是否跟随滚屏 
@@ -63,7 +64,7 @@
 	       		'class': conf.titleCls
 	      	});
 	      	_title.append($('<label></label>'));
-	      	_title.append($('<a></a>'));
+	      	_title.append($('<a></a>').html(conf.closeText));
 	      	var _content = $('<div></div>', {
 	      		'class': conf.contentCls
 	      	});
@@ -423,16 +424,22 @@
 					_isDown = true;
 					_clickPos.x = p_e.pageX;
 					_clickPos.y = p_e.pageY;
-					_showPos.x = _$dialog.css('left').split('px')[0] - 0;
-					_showPos.y = _$dialog.css('top').split('px')[0] - 0;
+					_showPos.x = _$dialog.position().left;
+					_showPos.y = _$dialog.position().top;
 					_$dialog.addClass(conf.unselectCls);
 				});
 			$('body').mousemove(function (p_e) {
 				if (_lock) { return; }
 				if (_isDown) {
+					var _top = p_e.pageY - _clickPos.y + _showPos.y;
+					var _left = p_e.pageX - _clickPos.x + _showPos.x;
+					if (conf.fix) {
+						 _left -= $(window).scrollLeft();
+						 _top -= $(window).scrollTop();
+					}
 					_$dialog.css({
-						'left': p_e.pageX - _clickPos.x + _showPos.x + 'px',
-						'top': p_e.pageY - _clickPos.y + _showPos.y + 'px'
+						'left': _left + 'px',
+						'top': _top + 'px'
 					});
 				}
 				p_e.originalEvent.preventDefault();
