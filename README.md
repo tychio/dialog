@@ -14,6 +14,7 @@
 - unselectCls[string] - 不能选择的class
 - bgClose[boolean] - 背景是否关闭
 - drag[boolean] - 是否可以拖拽
+- fix[boolean] - 是否跟随滚屏
 - width[number] - 宽度		
 - height[number] - 高度
 - top[number] - 顶部距离
@@ -50,7 +51,7 @@ $.dialog({
 - clear - 清空内容
 	- param null
 	- return this
-	- 清空内容，包括标题文字
+	- 清空内容，包括标题文字，按钮
 
 	>_dialog.title('标题').clear().content('内容', 20);
 - input - 添加输入框内容
