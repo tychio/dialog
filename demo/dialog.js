@@ -34,7 +34,8 @@
 	        tipCls: 		'dialog-tip',//提示类名
 	        unselectCls: 	'unselect', 
 	        bgClose: 		true,//点击背景关闭
-	        drag: 			true,//是否可以拖拽 
+	        drag: 			true,//是否可以拖拽
+	        fix: 			true,//是否跟随滚屏 
 	        width: 			360,//宽度
 	        height: 		0,//高度
 	        top: 			150,//顶部距离
@@ -74,7 +75,7 @@
 	      	}));
 		    //设置尺寸，添加类，放入生成的html标签
 	        $(conf.con).css({
-	        		'position': 	'absolute', 
+	        		'position': 	conf.fix ? 'fixed' : 'absolute', 
 	        		'display': 		'none', 
 	        		'z-index': 		10001, 
 	        		'top': 			_num2css(conf.top),
@@ -138,6 +139,7 @@
 	        if (_lock) { return api; }
 	    	$(conf.con).find('.' + conf.titleCls + ' label').empty();
 	    	$(conf.con).find('.' + conf.contentCls).empty();
+	    	$('.' + conf.bottomCls).empty();
 	    	return api;
 	    }
 	    /**
