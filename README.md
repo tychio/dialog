@@ -55,13 +55,14 @@ $.dialog({
 
 	>_dialog.title('标题').clear().content('内容', 20);
 - input - 添加输入框内容
-	- param p_tip[string]placeholder无内容时的提示文字
-	- param p_attr[object || string]input输入框的属性
+	- param p_attr[object || string]input输入框的属性，默认为id
+	- param p_label[string]label文字
 	- param p_input[boolean]true为textarea，false为input
+	- param p_enter[function]在输入框中按下回车执行的回调方法
 	- return this
 	- 特殊的content方法，直接生成input输入框或者textarea输入区域
 
-	>_dialog.input('请输入内容', {id: 'content'}, false);
+	>_dialog.input('input_id', 'label文字：', false, function () {sure();});
 - button - 添加按钮
 	- param p_set[object || string || function]关于按钮的设置
 		- name[string]按钮文字，默认为‘确认’，当p_set为string类型时则替换
