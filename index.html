@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>dialog demo</title>
+		<link rel="stylesheet" href="demo/dialog.css">
+		<script type="text/javascript" charset="utf-8" src="demo/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="demo/dialog.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			(function () {
+				var _dialog;
+				var _count = 0;
+				var _pos = [];//宽高顶左时回
+				_pos[0] = [400, 0, 200, 0.5, 1000];
+				_pos[1] = [300, 0, 0.3, 480, 1000];
+				_pos[2] = [700, 0, 0.2, 740, 1000];
+				_pos[3] = [500, 0, 0.14, 510, 1000];
+				_pos[4] = [300, 400, 0.1, 1200, 2000];
+				$(function () {
+					_dialog = $.dialog().init().title('对话框标题').content('对话框内容', 20)
+						.input('dialog_input', '用户名', false, function () {
+							_transform($(this).val());
+						});
+					_dialog.button({
+						name: '变形',
+						events: _transform
+					}).button(function () {
+						_dialog.tip('变形次数：' + _count);
+					}).show();
+				});
+				function _transform (p_cnt) {
+					if (p_cnt == null || _pos[p_cnt] == null) {
+						p_cnt = _count%_pos.length;
+					}
+					_count++;
+					_dialog.size(_pos[p_cnt]).lock();
+				}
+			})();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
