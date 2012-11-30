@@ -129,3 +129,7 @@ _dialog.button({
 	});
 }).show();
 ```
+
+### Demo
+
+[http://tychio.github.com/dialog/](http://tychio.github.com/dialog/ 'dialog demo')
