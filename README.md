@@ -3,7 +3,7 @@
 ### Config
 
 - con[string:selector] - 容器选择器表达式
-- bg[string] - 背景id
+- bgCls[string] - 背景的class
 - holderCls[string] - 对话框的class
 - titleCls[string] - 标题的class
 - contentCls[string] - 内容的class

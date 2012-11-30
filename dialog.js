@@ -24,7 +24,7 @@
         //配置
         var conf = {
             con:             '#dialog',//容器选择器表达式
-            bg:              'dialog-bg',//背景选择器表达式
+            bgCls:           'dialog-bg',//背景类名
             holderCls:       'dialog',//容器类名
             titleCls:        'dialog-title',//标题类名
             contentCls:      'dialog-content',//内容类名
@@ -91,7 +91,7 @@
             .html(_title).append(_content).append(_bottom)
             .find('.' + conf.titleCls + ' a').click(hideDialog);
             $('body').append($('<div></div>', {
-                'class': conf.bg
+                'class': conf.bgClsCls
             }).css('z-index', '10000'));
             //根据当前宽度设置左边距使之居中
             var _margin = (0 - $(conf.con).width()*0.5) + 'px';
@@ -204,7 +204,7 @@
                 .append($('<a></a>', _attr).html(_dSet.name))
                 .find('.' + conf.buttonCls + '_' + _countBtn);
             if (typeof _dSet.events == 'string') {
-            	_$btn.attr('href', _dSet.events);
+                _$btn.attr('href', _dSet.events);
             } else {
                 _$btn.click(_dSet.events);
             }
@@ -225,11 +225,11 @@
             var _dom = 'text';
             //一般的input为text类型，当id为password时则为password类型
             if (p_attr.id == 'password') {
-            	_dom = p_attr.id;
+                _dom = p_attr.id;
             }
             _dom = '<input type="' + _dom + '">';
             if (p_input) {
-            	_dom = '<textarea></textarea>';
+                _dom = '<textarea></textarea>';
             }
             var _content = $(_dom).attr(p_attr);
             if (p_label != null) {//有label时在input前添加label
@@ -240,9 +240,9 @@
             changeContent(_content);
             //添加按下回车时要运行的方法
             $('#' + p_attr.id).keyup(function (p_e) {
-            	if (p_e.which == 13) {
-            		p_enter.call(this);
-            	}
+                if (p_e.which == 13) {
+                    p_enter.call(this);
+                }
             });
             return api;
         }
@@ -257,9 +257,9 @@
             }
             //显示对话框和背景，并获取其jquery对象
             var _$con = $(conf.con).show();
-            var _$bg = $('.' + conf.bg).show();
+            var _$bg = $('.' + conf.bgClsCls).show();
             //绑定点击背景隐藏对话框的事件
-            if (conf.bgClose) {
+            if (conf.bgClsClsClose) {
                 _$bg.click(hideDialog);
             }
             //输入框获取焦点
@@ -271,7 +271,7 @@
         **/
         function hideDialog () {
             if (_lock) { return api; }
-            $(conf.con + ', .' + conf.bg).hide();
+            $(conf.con + ', .' + conf.bgClsCls).hide();
             return api;
         }
         /**
@@ -376,7 +376,7 @@
             var _$dialog = $(conf.con);
             _$dialog.find('.' + conf.titleCls).css('cursor', 'move')
                 .mouseup(function () {
-                	//鼠标弹起后清除位置数据
+                    //鼠标弹起后清除位置数据
                     _isDown = false;
                     _showPos = {
                         'x': 0,
@@ -397,8 +397,8 @@
             $('body').mousemove(function (p_e) {
                 if (_lock) { return; }
                 if (_isDown) {//当按下鼠标时拖动
-                	/*根据鼠标移动的相对位移和原来对话框位置
-                	  算出当前要移动到的位置*/
+                    /*根据鼠标移动的相对位移和原来对话框位置
+                      算出当前要移动到的位置*/
                     var _top = p_e.pageY - _clickPos.y + _showPos.y;
                     var _left = p_e.pageX - _clickPos.x + _showPos.x;
                     if (conf.fix) {//适应滚屏
