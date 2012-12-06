@@ -3,7 +3,7 @@
 ### Config
 
 - con[string:selector] - 容器选择器表达式
-- bgCls[string] - 背景的class
+- bgCls[string] - 背景的class，为空或未定义时则没有背景
 - holderCls[string] - 对话框的class
 - titleCls[string] - 标题的class
 - contentCls[string] - 内容的class

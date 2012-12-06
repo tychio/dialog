@@ -4,8 +4,8 @@
 /* date 2012.10.30
 /* version 1.0
 **/
-(function () {
-    $.dialog = function (p_conf) {
+jQuery.dialog = (function ($, undefined) {
+    return function (p_conf) {
         //接口
         var api = {
             init: initDialog,//初始化
@@ -82,7 +82,7 @@
             $(conf.con).css({
                     'position':     conf.fix ? 'fixed' : 'absolute', 
                     'display':         'none', 
-                    'z-index':         10001, 
+                    'z-index':         '10001', 
                     'top':             _num2css(conf.top),
                     'left':         _num2css(conf.left),
                     'width':         _num2css(conf.width),
@@ -90,9 +90,12 @@
                 }).addClass(conf.holderCls)
             .html(_title).append(_content).append(_bottom)
             .find('.' + conf.titleCls + ' a').click(hideDialog);
-            $('body').append($('<div></div>', {
-                'class': conf.bgClsCls
-            }).css('z-index', '10000'));
+            if (conf.bgCls && $(conf.con + '_bg').length == 0) {
+                $('body').append($('<div></div>', {
+                    'class': conf.bgCls,
+                    'id': conf.con.slice(1) + '_bg'
+                }).css('z-index', '10000'));
+            }
             //根据当前宽度设置左边距使之居中
             var _margin = (0 - $(conf.con).width()*0.5) + 'px';
             $(conf.con).css('margin-left', _margin);
@@ -115,7 +118,7 @@
         /* @param p_html 包裹bar后添加到content中的html标签
         /* @param p_height bar高度，使用上下padding实现
         **/
-        function changeContent (p_html, p_height) {
+        function changeContent (p_html, p_style) {
             if (_lock) { return api; }
             //jquery对象 对话框内容
             var _$con = $(conf.con + ' .' + conf.contentCls);
@@ -124,16 +127,20 @@
                 return _$con;
             } else {
                 //根据参数修改内容
-                _$con.append($('<div></div>', {
+                var _$bar = $('<div></div>', {
                     'class': conf.barCls
-                }).html(p_html));
-                if (p_height != null && p_height > 0) {
-                    //设置高度
-                    _$con.find('.' + conf.barCls).css({
-                        'padding-top': p_height + 'px',
-                        'padding-bottom': p_height + 'px'
-                    });
+                }).html(p_html);
+                if (typeof p_style == 'number' && p_style > 0) {
+                    p_style = {
+                        'padding-top': p_style + 'px',
+                        'padding-bottom': p_style + 'px'
+                    };
                 }
+                if (p_style != null) {
+                    //设置高度
+                    _$bar.css(p_style);
+                }
+                _$con.append(_$bar);
                 return api;
             }
         }
@@ -144,7 +151,7 @@
             if (_lock) { return api; }
             $(conf.con).find('.' + conf.titleCls + ' label').empty();
             $(conf.con).find('.' + conf.contentCls).empty();
-            $('.' + conf.buttonCls).detach();
+            $(conf.con).find('.' + conf.buttonCls).detach();
             _countBtn = 0;
             return api;
         }
@@ -204,7 +211,7 @@
                 .append($('<a></a>', _attr).html(_dSet.name))
                 .find('.' + conf.buttonCls + '_' + _countBtn);
             if (typeof _dSet.events == 'string') {
-                _$btn.attr('href', _dSet.events);
+            	_$btn.attr('href', _dSet.events);
             } else {
                 _$btn.click(_dSet.events);
             }
@@ -225,11 +232,11 @@
             var _dom = 'text';
             //一般的input为text类型，当id为password时则为password类型
             if (p_attr.id == 'password') {
-                _dom = p_attr.id;
+            	_dom = p_attr.id;
             }
             _dom = '<input type="' + _dom + '">';
             if (p_input) {
-                _dom = '<textarea></textarea>';
+            	_dom = '<textarea></textarea>';
             }
             var _content = $(_dom).attr(p_attr);
             if (p_label != null) {//有label时在input前添加label
@@ -240,9 +247,9 @@
             changeContent(_content);
             //添加按下回车时要运行的方法
             $('#' + p_attr.id).keyup(function (p_e) {
-                if (p_e.which == 13) {
-                    p_enter.call(this);
-                }
+            	if (p_e.which == 13) {
+            		p_enter.call(this);
+            	}
             });
             return api;
         }
@@ -251,15 +258,11 @@
         **/
         function showDialog () {
             if (_lock) { return api; }
-            if (_countBtn == 0) {
-                //至少需要一个按钮
-                addButton();
-            }
             //显示对话框和背景，并获取其jquery对象
             var _$con = $(conf.con).show();
-            var _$bg = $('.' + conf.bgClsCls).show();
+            var _$bg = $(conf.con + '_bg').show();
             //绑定点击背景隐藏对话框的事件
-            if (conf.bgClsClsClose) {
+            if (conf.bgClsClose) {
                 _$bg.click(hideDialog);
             }
             //输入框获取焦点
@@ -271,7 +274,7 @@
         **/
         function hideDialog () {
             if (_lock) { return api; }
-            $(conf.con + ', .' + conf.bgClsCls).hide();
+            $(conf.con + '_bg, ' + conf.con).hide();
             return api;
         }
         /**
@@ -376,7 +379,7 @@
             var _$dialog = $(conf.con);
             _$dialog.find('.' + conf.titleCls).css('cursor', 'move')
                 .mouseup(function () {
-                    //鼠标弹起后清除位置数据
+                	//鼠标弹起后清除位置数据
                     _isDown = false;
                     _showPos = {
                         'x': 0,
@@ -397,8 +400,8 @@
             $('body').mousemove(function (p_e) {
                 if (_lock) { return; }
                 if (_isDown) {//当按下鼠标时拖动
-                    /*根据鼠标移动的相对位移和原来对话框位置
-                      算出当前要移动到的位置*/
+                	/*根据鼠标移动的相对位移和原来对话框位置
+                	  算出当前要移动到的位置*/
                     var _top = p_e.pageY - _clickPos.y + _showPos.y;
                     var _left = p_e.pageX - _clickPos.x + _showPos.x;
                     if (conf.fix) {//适应滚屏
@@ -417,4 +420,4 @@
             });
         }
     };
-})();
+})(jQuery);
