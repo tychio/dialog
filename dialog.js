@@ -4,8 +4,8 @@
 /* date 2012.10.30
 /* version 1.0
 **/
-(function () {
-    $.dialog = function (p_conf) {
+jQuery.dialog = (function ($, undefined) {
+    return function (p_conf) {
         //接口
         var api = {
             init: initDialog,//初始化
@@ -24,7 +24,7 @@
         //配置
         var conf = {
             con:             '#dialog',//容器选择器表达式
-            bg:              'dialog-bg',//背景选择器表达式
+            bgCls:           'dialog-bg',//背景类名
             holderCls:       'dialog',//容器类名
             titleCls:        'dialog-title',//标题类名
             contentCls:      'dialog-content',//内容类名
@@ -82,7 +82,7 @@
             $(conf.con).css({
                     'position':     conf.fix ? 'fixed' : 'absolute', 
                     'display':         'none', 
-                    'z-index':         10001, 
+                    'z-index':         '10001', 
                     'top':             _num2css(conf.top),
                     'left':         _num2css(conf.left),
                     'width':         _num2css(conf.width),
@@ -90,9 +90,12 @@
                 }).addClass(conf.holderCls)
             .html(_title).append(_content).append(_bottom)
             .find('.' + conf.titleCls + ' a').click(hideDialog);
-            $('body').append($('<div></div>', {
-                'class': conf.bg
-            }).css('z-index', '10000'));
+            if ($(conf.con + '_bg').length == 0) {
+                $('body').append($('<div></div>', {
+                    'class': conf.bgCls,
+                    'id': conf.con.slice(1) + '_bg'
+                }).css('z-index', '10000'));
+            }
             //根据当前宽度设置左边距使之居中
             var _margin = (0 - $(conf.con).width()*0.5) + 'px';
             $(conf.con).css('margin-left', _margin);
@@ -115,7 +118,7 @@
         /* @param p_html 包裹bar后添加到content中的html标签
         /* @param p_height bar高度，使用上下padding实现
         **/
-        function changeContent (p_html, p_height) {
+        function changeContent (p_html, p_style) {
             if (_lock) { return api; }
             //jquery对象 对话框内容
             var _$con = $(conf.con + ' .' + conf.contentCls);
@@ -124,16 +127,20 @@
                 return _$con;
             } else {
                 //根据参数修改内容
-                _$con.append($('<div></div>', {
+                var _$bar = $('<div></div>', {
                     'class': conf.barCls
-                }).html(p_html));
-                if (p_height != null && p_height > 0) {
-                    //设置高度
-                    _$con.find('.' + conf.barCls).css({
-                        'padding-top': p_height + 'px',
-                        'padding-bottom': p_height + 'px'
-                    });
+                }).html(p_html);
+                if (typeof p_style == 'number' && p_style > 0) {
+                    p_style = {
+                        'padding-top': p_style + 'px',
+                        'padding-bottom': p_style + 'px'
+                    };
                 }
+                if (p_style != null) {
+                    //设置高度
+                    _$bar.css(p_style);
+                }
+                _$con.append(_$bar);
                 return api;
             }
         }
@@ -144,7 +151,7 @@
             if (_lock) { return api; }
             $(conf.con).find('.' + conf.titleCls + ' label').empty();
             $(conf.con).find('.' + conf.contentCls).empty();
-            $('.' + conf.buttonCls).detach();
+            $(conf.con).find('.' + conf.buttonCls).detach();
             _countBtn = 0;
             return api;
         }
@@ -251,15 +258,11 @@
         **/
         function showDialog () {
             if (_lock) { return api; }
-            if (_countBtn == 0) {
-                //至少需要一个按钮
-                addButton();
-            }
             //显示对话框和背景，并获取其jquery对象
             var _$con = $(conf.con).show();
-            var _$bg = $('.' + conf.bg).show();
+            var _$bg = $(conf.con + '_bg').show();
             //绑定点击背景隐藏对话框的事件
-            if (conf.bgClose) {
+            if (conf.bgClsClose) {
                 _$bg.click(hideDialog);
             }
             //输入框获取焦点
@@ -271,7 +274,7 @@
         **/
         function hideDialog () {
             if (_lock) { return api; }
-            $(conf.con + ', .' + conf.bg).hide();
+            $(conf.con + '_bg, ' + conf.con).hide();
             return api;
         }
         /**
@@ -417,4 +420,4 @@
             });
         }
     };
-})();
+})(jQuery);

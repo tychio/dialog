@@ -3,7 +3,7 @@
 ### Config
 
 - con[string:selector] - 容器选择器表达式
-- bg[string] - 背景id
+- bgCls[string] - 背景的class
 - holderCls[string] - 对话框的class
 - titleCls[string] - 标题的class
 - contentCls[string] - 内容的class
@@ -43,11 +43,11 @@ $.dialog({
 	>_dialog.title('标题');
 - content - 设置内容
 	- param p_html[string:html]放入的HTML标签
-	- param p_height[number]上下间隔的距离
+	- param p_style[object]CSS样式 || [number]上下间隔的距离
 	- return this || jQuery object 不传参数则返回content的jQ对象
-	- 设置内容，添加一个内容栏，并指定该内容栏的上下间隔
+	- 设置内容，添加一个内容栏，并指定该内容栏的样式，如果为数字则直接指定padding-top和padding-bottom的尺寸。
 
-	>_dialog.content('内容', 20);
+	>_dialog.content('内容', 20);//上下各20px的内边距
 - clear - 清空内容
 	- param null
 	- return this
@@ -129,3 +129,7 @@ _dialog.button({
 	});
 }).show();
 ```
+
+### Demo
+
+[http://tychio.github.com/dialog/](http://tychio.github.com/dialog/ 'dialog demo')
