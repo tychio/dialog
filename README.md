@@ -43,9 +43,9 @@ $.dialog({
 	>_dialog.title('标题');
 - content - 设置内容
 	- param p_html[string:html]放入的HTML标签
-	- param p_height[number]上下间隔的距离
+	- param p_style[object] || [number]CSS样式或者上下内边距
 	- return this || jQuery object 不传参数则返回content的jQ对象
-	- 设置内容，添加一个内容栏，并指定该内容栏的上下间隔
+	- 设置内容，添加一个内容栏，并指定该内容栏的CSS样式或上下间隔
 
 	>_dialog.content('内容', 20);
 - clear - 清空内容
