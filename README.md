@@ -132,4 +132,4 @@ _dialog.button({
 
 ### Demo
 
-[http://tychio.github.com/dialog/](http://tychio.github.com/dialog/ 'dialog demo')
+[http://www.tychio.net/dialog/](http://www.tychio.net/dialog/ 'dialog demo')
