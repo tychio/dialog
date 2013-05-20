@@ -3,7 +3,11 @@
 ### Config
 
 - con[string:selector] - 容器选择器表达式
+<<<<<<< HEAD
 - bgCls[string] - 背景的class，为空或未定义时则没有背景
+=======
+- bgCls[string] - 背景的class
+>>>>>>> gh-pages
 - holderCls[string] - 对话框的class
 - titleCls[string] - 标题的class
 - contentCls[string] - 内容的class
@@ -43,11 +47,19 @@ $.dialog({
 	>_dialog.title('标题');
 - content - 设置内容
 	- param p_html[string:html]放入的HTML标签
+<<<<<<< HEAD
 	- param p_style[object] || [number]CSS样式或者上下内边距
 	- return this || jQuery object 不传参数则返回content的jQ对象
 	- 设置内容，添加一个内容栏，并指定该内容栏的CSS样式或上下间隔
 
 	>_dialog.content('内容', 20);
+=======
+	- param p_style[object]CSS样式 || [number]上下间隔的距离
+	- return this || jQuery object 不传参数则返回content的jQ对象
+	- 设置内容，添加一个内容栏，并指定该内容栏的样式，如果为数字则直接指定padding-top和padding-bottom的尺寸。
+
+	>_dialog.content('内容', 20);//上下各20px的内边距
+>>>>>>> gh-pages
 - clear - 清空内容
 	- param null
 	- return this
@@ -132,4 +144,8 @@ _dialog.button({
 
 ### Demo
 
+<<<<<<< HEAD
 [http://tychio.github.com/dialog/](http://tychio.github.com/dialog/ 'dialog demo')
+=======
+[http://www.tychio.net/dialog/](http://www.tychio.net/dialog/ 'dialog demo')
+>>>>>>> gh-pages
