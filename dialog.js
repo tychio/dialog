@@ -110,6 +110,9 @@ jQuery.dialog = (function ($, undefined) {
         **/
         function setTitle (p_text) {
             if (_lock) { return api; }
+            if (typeof p_text === 'undefined') {
+                return $(conf.con).find('.' + conf.titleCls + ' label').html();
+            }
             $(conf.con).find('.' + conf.titleCls + ' label').html(p_text);
             return api;
         }
