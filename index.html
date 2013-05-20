@@ -9,7 +9,7 @@
 			(function () {
 				var _dialog;
 				var _count = 0;
-				var _pos = [];//宽高顶左时回
+				var _pos = [];//宽高顶左时
 				_pos[0] = [400, 0, 200, 0.5, 1000];
 				_pos[1] = [300, 0, 0.3, 480, 1000];
 				_pos[2] = [700, 0, 0.2, 740, 1000];
@@ -18,7 +18,7 @@
 				_size = ['width', 'height', 'top', 'left'];
 				$(function () {
 					_dialog = $.dialog().init().title('I\'m a dialog')
-					    .content('I can tranform if you will try to click the tranform button.', 20)
+					    .content('I can tranform if you will try to click the transform button.', 20)
 						.input('dialog_' + _size[0], _size[0], false, function () {
 							_transform();
 						}).input('dialog_' + _size[1], _size[1], false, function () {
@@ -29,7 +29,7 @@
 							_transform();
 						});
 					_dialog.button({
-						name: 'tranform',
+						name: 'transform',
 						events: _transform
 					}).button({
 						name: 'count',
@@ -40,16 +40,20 @@
 				});
 				function _transform () {
 					_count++;
+					if (_count >= _pos.length) {
+						_count = 0;
+					}
+					var __pos = _pos[_count].slice();
 					for (var i = 0; i < _size.length; i++) {
 						var __val = $('#dialog_' + _size[i]).val();
 						if (typeof __val != 'undefined' && __val != '') {
 							__val = __val - 0;
 							if (!isNaN(__val)) {
-							    _pos[_count][i] = __val;
+							    __pos[i] = __val;
 						    }
 						}
 					}
-					_dialog.size(_pos[_count]).lock();
+					_dialog.size(__pos).lock();
 				}
 			})();
 		</script>

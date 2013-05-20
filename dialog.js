@@ -333,7 +333,12 @@ jQuery.dialog = (function ($, undefined) {
                 if (conf.height == 0) {
                     _temp = $(conf.con).clone()
                         .appendTo($(conf.con).parent()).css('height', 'auto');
-                    conf.height = _temp.height();
+                    conf.height = _temp.css({
+                        width: _num2css(conf.width, 'width'),
+                        height: _num2css(conf.height, 'height'),
+                        top: _num2css(conf.top, 'top'),
+                        left: _num2css(conf.left, 'left')
+                    }).outerHeight(true);
                     _temp.detach();
                 }
                 $(conf.con).animate({
