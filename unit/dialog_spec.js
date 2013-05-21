@@ -18,11 +18,28 @@ describe('Dialog', function () {
         it('exsit title function', function () {
             expect(d.title).not.toBeUndefined();
         });
-        it('avaliable setting title function', function () {
-            var _title = 'this title made by jasmine.';
-            expect(d.title()).not.toEqual(_title);
-            d.title(_title);
-            expect(d.title()).toEqual(_title);
+        it('the text before is compared with the text after the setting title', function () {
+            var _testTitle = 'this title made by jasmine.';
+            expect(d.title()).not.toEqual(_testTitle);
+            d.title(_testTitle);
+            expect(d.title()).toEqual(_testTitle);
+        });
+    });
+    describe('Testing api function - content', function () {
+        it('exsit content function', function () {
+            expect(d.content).not.toBeUndefined();
+        });
+        it('getting the content of jQuery object', function () {
+            expect(d.content() instanceof jQuery).toBeTruthy();
+        });
+        it('push a bar into the content and setting style', function () {
+            var _testId = 'jasmine_test_content';
+            var _testNo = (Math.random() + '').slice(2, 7) + '';
+            d.content($('<div/>').attr('id', _testId), {
+                'zoom':  _testNo
+            });
+            expect($('#' + _testId).length).toBeGreaterThan(0);
+            expect($('#' + _testId).parent().css('zoom')).toEqual(_testNo);
         });
     });
 });
