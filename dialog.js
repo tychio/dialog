@@ -234,8 +234,9 @@ jQuery.dialog = (function ($, undefined) {
             }
             var _dom = 'text';
             //一般的input为text类型，当id为password时则为password类型
-            if (p_attr.id == 'password') {
-            	_dom = p_attr.id;
+            if (p_attr.inputtype == 'password') {
+            	_dom = p_attr.inputtype;
+                delete p_attr.inputtype;
             }
             _dom = '<input type="' + _dom + '">';
             if (p_input) {
@@ -249,11 +250,14 @@ jQuery.dialog = (function ($, undefined) {
             //添加input
             changeContent(_content);
             //添加按下回车时要运行的方法
-            $('#' + p_attr.id).keyup(function (p_e) {
-            	if (p_e.which == 13) {
-            		p_enter.call(this);
-            	}
-            });
+            if (typeof p_enter !== 'undefined') {
+                _content.not('label').keyup(function (p_e) {
+                    var _key = p_e.which || p_e.keyCode;
+                    if (_key == 13) {
+                        p_enter.call(this, p_e);
+                    }
+                });
+            }
             return api;
         }
         /**
