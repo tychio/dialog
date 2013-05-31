@@ -89,4 +89,11 @@ describe('Dialog', function () {
             });
         });
     });
+    describe('Testing api function - tip', function () {
+        it('compared with getting and setting', function () {
+            var _testTip = 'dialog tip text<b>' + getRandom(4) + '</b>';
+            d.tip(_testTip);
+            expect(d.tip().html()).toEqual(_testTip);
+        });
+    });
 });
