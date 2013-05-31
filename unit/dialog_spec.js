@@ -96,4 +96,26 @@ describe('Dialog', function () {
             expect(d.tip().html()).toEqual(_testTip);
         });
     });
+    describe('Testing api function - button', function () {
+        var _testClick = false;
+        var _testSet = {
+            name: 'buttonName' + getRandom(4),
+            cls: 'buttonClass' + getRandom(4),
+            id: 'buttonId' + getRandom(4),
+            events: function () {
+                _testClick = true;
+            }
+        };
+        it('setting name, class and id', function () {
+            d.button(_testSet);
+            var _btn = $('#' + _testSet.id);
+            expect(_btn.length).toBeGreaterThan(0);
+            expect(_btn.hasClass(_testSet.cls)).toBeTruthy();
+            expect(_btn.html()).toEqual(_testSet.name);
+        });
+        it('trigger click button', function () {
+            $('#' + _testSet.id).click();
+            expect(_testClick).toBeTruthy();
+        });
+    });
 });
