@@ -5,8 +5,7 @@ function getRandom (p_len) {
 describe('Dialog', function () {
     var d,
     testStr = {
-        con: '#dialog',
-        title: 'dialog-title'
+        con: '#dialog'
     };
     describe('Init Dialog and testing DOM', function () {
         d = $.dialog(testStr);
@@ -116,6 +115,21 @@ describe('Dialog', function () {
         it('trigger click button', function () {
             $('#' + _testSet.id).click();
             expect(_testClick).toBeTruthy();
+        });
+    });
+    describe('Testing api function - clear', function () {
+        it('clear title', function () {
+            d.clear();
+            expect(d.title().length).toEqual(0);
+        });
+        it('clear content', function () {
+            expect(d.content().html()).toEqual('');
+        });
+        it('clear tip', function () {
+            expect(d.tip().html()).toEqual('');
+        });
+        it('clear button', function () {
+            expect(d.tip().siblings().length).toEqual(0);
         });
     });
 });
