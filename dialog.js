@@ -155,6 +155,7 @@ jQuery.dialog = (function ($, undefined) {
             $(conf.con).find('.' + conf.titleCls + ' label').empty();
             $(conf.con).find('.' + conf.contentCls).empty();
             $(conf.con).find('.' + conf.buttonCls).detach();
+            changeTip('');
             _countBtn = 0;
             return api;
         }
@@ -203,7 +204,7 @@ jQuery.dialog = (function ($, undefined) {
             }
             //html属性部分的字符串
             var _attr = {
-                'class': conf.buttonCls + '_' + _countBtn + ' ' + _dSet.cls
+                'class': conf.buttonCls + ' ' + conf.buttonCls + '_' + _countBtn + ' ' + _dSet.cls
             };
             var _id = '';
             if (_dSet.id != '') {
