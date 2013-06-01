@@ -132,4 +132,35 @@ describe('Dialog', function () {
             expect(d.tip().siblings().length).toEqual(0);
         });
     });
+    describe('Testing api function - other', function () {
+        it('show dialog', function () {
+            var _dialog = $('#dialog');
+            expect(_dialog.css('display')).toEqual('none');
+            d.show();
+            expect(_dialog.css('display')).not.toEqual('none');
+        });
+        it('hide dialog', function () {
+            var _dialog = $('#dialog');
+            expect(_dialog.css('display')).not.toEqual('none');
+            d.hide();
+            expect(_dialog.css('display')).toEqual('none');
+        });
+        it('lock dialog', function () {
+            var _dialog = $('#dialog');
+            expect(_dialog.css('display')).toEqual('none');
+            d.lock();
+            d.show();
+            expect(_dialog.css('display')).toEqual('none');
+        });
+        it('unlock dialog', function () {
+            var _dialog = $('#dialog');
+            expect(_dialog.css('display')).toEqual('none');
+            d.lock();
+            d.show();
+            expect(_dialog.css('display')).toEqual('none');
+            d.unlock();
+            d.show();
+            expect(_dialog.css('display')).not.toEqual('none');
+        });
+    });
 });
