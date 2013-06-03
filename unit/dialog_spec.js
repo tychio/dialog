@@ -1,7 +1,8 @@
 function getRandom (p_len) {
-    return (Math.random() + '').slice(2, 2 + p_len) + '';
+    var _num = (Math.random() + '').slice(2, 2 + p_len) + '';
+    return _num > 1 ? _num : getRandom(p_len);
 }
-
+// try it out unit test
 describe('Dialog', function () {
     var d,
     testStr = {
@@ -161,6 +162,23 @@ describe('Dialog', function () {
             d.unlock();
             d.show();
             expect(_dialog.css('display')).not.toEqual('none');
+        });
+    });
+    describe('Testing api function - set', function () {
+        var _testSize = [
+            getRandom(2) - 0,
+            getRandom(2) - 0,
+            getRandom(2) - 0,
+            getRandom(2) - 0,
+            0
+        ];
+        it('set dialog size', function () {
+            d.size(_testSize);
+            var _dialog = $('#dialog')[0];
+            expect(_dialog.style.width).toEqual(_testSize[0] + 'px');
+            expect(_dialog.style.height).toEqual(_testSize[1] + 'px');
+            expect(_dialog.style.top).toEqual(_testSize[2] + 'px');
+            expect(_dialog.style.left).toEqual(_testSize[3] + 'px');
         });
     });
 });
