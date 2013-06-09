@@ -21,7 +21,7 @@ describe('Dialog', function () {
         dialog.init();
     });
     afterEach(function () {
-        $(selector.con).remove();
+        // $(selector.con).remove();
         $(selector.bgCls).remove();
     });
     describe('Init Dialog and testing DOM', function () {
@@ -50,15 +50,28 @@ describe('Dialog', function () {
             expect($('.' + selector.tipCls).length).toBeGreaterThan(0);
         });
     });
-    xdescribe('Testing API function Title', function () {
-        it('exsit title function', function () {
-            expect(d.title).not.toBeUndefined();
+    describe('testing Title', function () {
+        var _testTitle = 'jasmine';
+        var _title = function (p_html) {
+            if (typeof p_html === 'undefined') {
+                return $('.' + selector.titleCls).find('label').html();
+            } else {
+                $('.' + selector.titleCls).find('label').html(p_html);
+            }
+        };
+        it('title function is avaliable', function () {
+            expect(dialog.title).toBeDefined();
         });
-        it('the text before is compared with the text after the setting title', function () {
-            var _testTitle = 'this title made by jasmine.';
-            expect(d.title()).not.toEqual(_testTitle);
-            d.title(_testTitle);
-            expect(d.title()).toEqual(_testTitle);
+        it('setting title to value' + _testTitle, function () {
+            expect(_title()).not.toEqual(_testTitle);
+            var _api = dialog.title(_testTitle);
+            expect(_title()).toEqual(_testTitle);
+            expect(typeof _api).toEqual('object');
+        });
+        it('getting title string', function () {
+            _title(_testTitle);
+            var _val = dialog.title();
+            expect(_val).toEqual(_testTitle);
         });
     });
     xdescribe('Testing API function - content', function () {
