@@ -91,11 +91,15 @@ describe('Dialog', function () {
             expect($('#' + _testId).parent().css('height')).toEqual(_testStyle);
         });
     });
-    xdescribe('Testing API function - tip', function () {
+    describe('Testing API function - tip', function () {
+        it('function is avaliable', function () {
+            expect(dialog.tip).toBeDefined();
+        });
         it('compared with getting and setting', function () {
-            var _testTip = 'dialog tip text<b>' + getRandom(4) + '</b>';
-            d.tip(_testTip);
-            expect(d.tip().html()).toEqual(_testTip);
+            var _testTip = 'this is <b>jasmine</b>';
+            expect(typeof dialog.tip(_testTip)).toEqual('object');
+            expect(dialog.tip() instanceof jQuery).toBeTruthy();
+            expect(dialog.tip().html()).toEqual(_testTip);
         });
     });
     xdescribe('Testing API function - button', function () {
