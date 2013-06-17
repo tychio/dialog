@@ -24,7 +24,7 @@ describe('Dialog', function () {
         // $(selector.con).remove();
         $(selector.bgCls).remove();
     });
-    describe('Init Dialog and testing DOM', function () {
+    describe('Initialization and getting API', function () {
         it('APIs is avaliable', function () {
             expect(typeof dialog).toEqual('object');
             expect(dialog.init).toBeDefined();
@@ -91,7 +91,7 @@ describe('Dialog', function () {
             expect($('#' + _testId).parent().css('height')).toEqual(_testStyle);
         });
     });
-    describe('Testing API function - tip', function () {
+    describe('testing Tip', function () {
         it('function is avaliable', function () {
             expect(dialog.tip).toBeDefined();
         });
@@ -102,7 +102,7 @@ describe('Dialog', function () {
             expect(dialog.tip().html()).toEqual(_testTip);
         });
     });
-    describe('Testing API function - button', function () {
+    describe('testing Button', function () {
         var _testClick = false;
         var _testSet = {
             name: 'buttonNameJasmine',
@@ -112,6 +112,9 @@ describe('Dialog', function () {
                 _testClick = true;
             }
         };
+        it('function is avaliable', function () {
+            expect(dialog.button).toBeDefined();
+        });
         it('setting name, class and id', function () {
             dialog.button(_testSet);
             var _btn = $('#' + _testSet.id);
@@ -119,7 +122,7 @@ describe('Dialog', function () {
             expect(_btn.hasClass(_testSet.cls)).toBeTruthy();
             expect(_btn.html()).toEqual(_testSet.name);
         });
-        it('trigger click button', function () {
+        it('trigger click on button', function () {
             dialog.button(_testSet);
             $('#' + _testSet.id).click();
             expect(_testClick).toBeTruthy();
