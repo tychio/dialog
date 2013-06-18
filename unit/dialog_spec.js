@@ -159,19 +159,37 @@ describe('Dialog', function () {
             expect(key).toEqual(13);
         });
     });
-    xdescribe('Testing API function - clear', function () {
+    describe('testing Clear', function () {
+        it('function is avaliable', function () {
+            expect(dialog.clear).toBeDefined();
+        });
         it('clear title', function () {
-            d.clear();
-            expect(d.title().length).toEqual(0);
+            dialog.title('jasmine');
+            expect(dialog.title().length).toBeGreaterThan(0);
+            expect(dialog.title()).not.toEqual('');
+            dialog.clear();
+            expect(dialog.title().length).toEqual(0);
+            expect(dialog.title()).toEqual('');
         });
         it('clear content', function () {
-            expect(d.content().html()).toEqual('');
+            dialog.content($('<div/>'));
+            expect(dialog.content().children().length).toBeGreaterThan(0);
+            expect(dialog.content().html()).not.toEqual('');
+            dialog.clear();
+            expect(dialog.content().children().length).toEqual(0);
+            expect(dialog.content().html()).toEqual('');
         });
         it('clear tip', function () {
-            expect(d.tip().html()).toEqual('');
+            dialog.tip('jasmineTip');
+            expect(dialog.tip().html()).not.toEqual('');
+            dialog.clear();
+            expect(dialog.tip().html()).toEqual('');
         });
         it('clear button', function () {
-            expect(d.tip().siblings().length).toEqual(0);
+            dialog.button('jasmineButton');
+            expect(dialog.tip().siblings().length).toBeGreaterThan(0);
+            dialog.clear();
+            expect(dialog.tip().siblings().length).toEqual(0);
         });
     });
     xdescribe('Testing API function - other', function () {
