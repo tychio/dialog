@@ -128,47 +128,35 @@ describe('Dialog', function () {
             expect(_testClick).toBeTruthy();
         });
     });
-    xdescribe('Testing API function - input(refer content)', function () {
+    describe('testing Input', function () {
+        it('function is avaliable', function () {
+            expect(dialog.input).toBeDefined();
+        });
         it('setting the input attr', function () {
-            var _testAttr = getRandom(5);
-            d.input({
+            var _testAttr = 'jasmineAttribute';
+            dialog.input({
                 'data-attr': _testAttr,
                 'inputtype': 'password'
             });
-            var $input = d.content().children().last().find('input');
+            var $input = dialog.content().children().last().find('input');
             expect($input.attr('data-attr')).toEqual(_testAttr);
             expect($input.attr('type')).toEqual('password');
         });
         it('create textarea', function () {
-            d.input({}, '', true);
-            var $bar = d.content().children().last();
+            dialog.input({}, '', true);
+            var $bar = dialog.content().children().last();
             expect($bar.find('textarea').length).toBeGreaterThan(0);
             expect($bar.children().last()[0].tagName.toLocaleLowerCase()).toEqual('textarea');
         });
         it('add event for enter', function () {
-            var flag, enter, key;
-            runs(function () {
-                flag = false;
-                enter = 0;
-                key = -1;
-                d.input({}, '', false, function (p_e) {
-                    flag = true;
-                    key = p_e.which || p_e.keyCode;
-                });
-                setTimeout(function () {
-                    var _e = $.Event('keyup');
-                    _e.which = 13;
-                    d.content().children().last().find('input').trigger(_e);
-                }, 200);
+            var key = 0;
+            dialog.input({}, '', false, function (p_e) {
+                key = p_e.which || p_e.keyCode;
             });
-            waitsFor(function () {
-                enter++;
-                return flag;
-            }, 'trigger the input enter event', 1000);
-            runs(function () {
-                expect(enter).toBeGreaterThan(0);
-                expect(key).toEqual(13);
-            });
+            var _e = $.Event('keyup');
+            _e.which = 13;
+            dialog.content().children().last().find('input').trigger(_e);
+            expect(key).toEqual(13);
         });
     });
     xdescribe('Testing API function - clear', function () {
