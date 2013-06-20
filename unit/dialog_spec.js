@@ -192,12 +192,17 @@ describe('Dialog', function () {
             expect(dialog.tip().siblings().length).toEqual(0);
         });
     });
+    describe('testing Show', function () {
+        it('function is avaliable', function () {
+            expect(dialog.show).toBeDefined();
+        });
+        it('show dialog frame', function () {
+            dialog.show();
+            expect($(selector.con).css('display')).not.toEqual('none');
+        });
+    });
     xdescribe('Testing API function - other', function () {
         it('show dialog', function () {
-            var _dialog = $('#dialog');
-            expect(_dialog.css('display')).toEqual('none');
-            d.show();
-            expect(_dialog.css('display')).not.toEqual('none');
         });
         it('hide dialog', function () {
             var _dialog = $('#dialog');
