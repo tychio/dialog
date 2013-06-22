@@ -230,7 +230,7 @@ describe('Dialog', function () {
             expect($('.' + selector.buttonCls).length).toBeGreaterThan(0);
         });
     });
-    xdescribe('Testing API function - set', function () {
+    describe('Testing API function - set', function () {
         var _testSize = [
             getRandom(2) - 0,
             getRandom(2) - 0,
@@ -238,6 +238,9 @@ describe('Dialog', function () {
             getRandom(2) - 0,
             0
         ];
+        it('function is avaliable', function () {
+            expect(dialog.size).toBeDefined();
+        });
         it('set dialog size', function () {
             d.size(_testSize);
             var _dialog = $('#dialog')[0];
