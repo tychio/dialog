@@ -204,31 +204,30 @@ describe('Dialog', function () {
             expect($(selector.con).css('display')).toEqual('none');
         });
     });
-    xdescribe('Testing API function - other', function () {
-        it('show dialog', function () {
+    describe('testing Lock and Unlock', function () {
+        it('function is avaliable', function () {
+            expect(dialog.lock).toBeDefined();
+            expect(dialog.unlock).toBeDefined();
         });
-        it('hide dialog', function () {
-            var _dialog = $('#dialog');
-            expect(_dialog.css('display')).not.toEqual('none');
-            d.hide();
-            expect(_dialog.css('display')).toEqual('none');
-        });
-        it('lock dialog', function () {
-            var _dialog = $('#dialog');
-            expect(_dialog.css('display')).toEqual('none');
-            d.lock();
-            d.show();
-            expect(_dialog.css('display')).toEqual('none');
-        });
-        it('unlock dialog', function () {
-            var _dialog = $('#dialog');
-            expect(_dialog.css('display')).toEqual('none');
-            d.lock();
-            d.show();
-            expect(_dialog.css('display')).toEqual('none');
-            d.unlock();
-            d.show();
-            expect(_dialog.css('display')).not.toEqual('none');
+        it('locked and unlocked', function () {
+            dialog.clear().lock()
+                .title('jasmine').content('jasmineContent')
+                .tip('jasmineTip').button('jasmineButton')
+                .input({id: 'jasmineInput'});
+                console.log(dialog.title())
+            expect($('.' + selector.titleCls).find('label').html()).toEqual('');
+            expect($('.' + selector.contentCls).children().length).toEqual(0);
+            expect($('#jasmineInput').length).toEqual(0);
+            expect($('.' + selector.tipCls).html()).toEqual('');
+            expect($('.' + selector.buttonCls).length).toEqual(0);
+            dialog.unlock().title('jasmine').content('jasmineContent')
+                .tip('jasmineTip').button('jasmineButton')
+                .input({id: 'jasmineInput'});
+            expect($('.' + selector.titleCls).find('label').html()).toEqual('jasmine');
+            expect($('.' + selector.contentCls).children().length).toBeGreaterThan(0);
+            expect($('#jasmineInput').length).toBeGreaterThan(0);
+            expect($('.' + selector.tipCls).html()).toEqual('jasmineTip');
+            expect($('.' + selector.buttonCls).length).toBeGreaterThan(0);
         });
     });
     xdescribe('Testing API function - set', function () {
