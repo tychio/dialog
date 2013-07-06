@@ -7,6 +7,8 @@
 .metadata
 bin/
 tmp/
+node_modules/
+out/
 *.tmp
 *.bak
 *.swp
