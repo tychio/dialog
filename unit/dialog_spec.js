@@ -242,7 +242,7 @@ describe('Dialog', function () {
             expect(dialog.size).toBeDefined();
         });
         it('set dialog size', function () {
-            d.size(_testSize);
+            dialog.size(_testSize);
             var _dialog = $('#dialog')[0];
             expect(_dialog.style.width).toEqual(_testSize[0] + 'px');
             expect(_dialog.style.height).toEqual(_testSize[1] + 'px');
