@@ -136,4 +136,5 @@ _dialog.button({
 
 ### Unit ###
 
-[![Build Status](https://travis-ci.org/path/to/your_repository.png?branch=master)](http://travis-ci.org/path/to/your_repository)
+[![Build Status](https://travis-ci.org/tychio/dialog
+.png?branch=master)](https://travis-ci.org/tychio/dialog)
