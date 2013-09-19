@@ -1,0 +1,11 @@
+{
+    "name": "jquery.dialog",
+    "version": "2.0.1",
+    "devDependencies": {
+        "grunt": "*",
+        "grunt-contrib-jasmine": "*"
+    },
+    "scripts": {
+        "test": "grunt jasmine:test"
+    }
+}

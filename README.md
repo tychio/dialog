@@ -1,6 +1,6 @@
-## 基于jQuery的一个对话框插件 - dialog
+## 基于jQuery的一个对话框插件 - dialog ##
 
-### Config
+### Config ###
 
 - con[string:selector] - 容器选择器表达式
 - bgCls[string] - 背景的class，为空或未定义时则没有背景
@@ -27,7 +27,7 @@ $.dialog({
 });
 ```
 
-### API
+### API ###
 
 - init - 初始化
 	- param null
@@ -115,7 +115,7 @@ $.dialog({
 
 	>_dialog.lock().size(400, 0, 200, 0.5, 1000, function () {_dialog.unlock();});
 
-### Example
+### Example ###
 
 ```js
 var _dialog = $.dialog().init().title('标题').content('内容');
@@ -130,6 +130,10 @@ _dialog.button({
 }).show();
 ```
 
-### Demo
+### Demo ###
 
 [http://www.tychio.net/dialog/](http://www.tychio.net/dialog/ 'dialog demo')
+
+### Unit ###
+
+[![Build Status](https://travis-ci.org/path/to/your_repository.png?branch=master)](http://travis-ci.org/path/to/your_repository)
