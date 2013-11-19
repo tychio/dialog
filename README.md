@@ -1,139 +1,151 @@
-## 基于jQuery的一个对话框插件 - dialog ##
+### a dialog plugin based on jQuery ###
 
-### Config ###
+##### Config #####
 
-- con[string:selector] - 容器选择器表达式
-- bgCls[string] - 背景的class，为空或未定义时则没有背景
-- holderCls[string] - 对话框的class
-- titleCls[string] - 标题的class
-- contentCls[string] - 内容的class
-- barCls[string] - 内容栏的class
-- bottomCls[string] - 底部的class
-- buttonCls[string] - 按钮的class
-- tipCls[string] - 提示位置的class
-- unselectCls[string] - 不能选择的class
-- bgClose[boolean] - 背景是否关闭
-- drag[boolean] - 是否可以拖拽
-- fix[boolean] - 是否跟随滚屏
-- width[number] - 宽度		
-- height[number] - 高度
-- top[number] - 顶部距离
-- left[number] - 左侧距离
+- con[string:selector] - a expression of selector for container
+- bgCls[string] - background of class, it's none background if is null or undefined.
+- holderCls[string] - dialog of class.
+- titleCls[string] - title of class.
+- contentCls[string] - content of class.
+- barCls[string] - line of class in content.
+- bottomCls[string] - bottom of class.
+- buttonCls[string] - button of class.
+- tipCls[string] - tip of class.
+- unselectCls[string] - a class for preventing user to select text.
+- bgClose[boolean] - it's true if dialog will close on clicking background.
+- drag[boolean] - it's true if dialog can be dragged.
+- fix[boolean] - it's true if dialog fixed scroll.
+- width[number] - dialog of width.
+- height[number] - dialog of height.
+- top[number] - dialog of top.
+- left[number] - dialog of bottom.
 
 ```js
-//配置方法
+//simple init
 $.dialog({
 	con: '#dialog'
 });
 ```
 
-### API ###
+##### API #####
 
-- init - 初始化
-	- param null
+- init - initializing dialog.
+	- param void
 	- return this
-	- 建立dialog的html标签，放入容器
+	- build dialog of DOM and put in container.
 
 	>var _dialog = $.dialog().init();
-- title - 设置标题
-	- param p_text[string]标题文字
+
+- title - setting title text.
+	- param p_text[string] a text for title.
 	- return this
-	- 设置标题文字
+	- setting a text for title and return the title of jQuery Object.
 
-	>_dialog.title('标题');
-- content - 设置内容
-	- param p_html[string:html]放入的HTML标签
-	- param p_style[object]CSS样式 || [number]上下间隔的距离
-	- return this || jQuery object 不传参数则返回content的jQ对象
-	- 设置内容，添加一个内容栏，并指定该内容栏的样式，如果为数字则直接指定padding-top和padding-bottom的尺寸。
+	>_dialog.title('This is title');
 
-	>_dialog.content('内容', 20);//上下各20px的内边距
-- clear - 清空内容
+- content - setting content.
+	- param p_html[htmlString]
+	- param p_style[object] style || [number] padding of top and bottom.
+	- return this || jQuery object when the method haven't accepted any parameters.
+	- add a bar or line put in the content and setting style. It's will set padding of top and bottom if the parameter of type is number.
+
+	>_dialog.content('some texts and others', 20);//padding of top and bottom is 20 pixel.
+
+- clear - clear dialog
 	- param null
 	- return this
-	- 清空内容，包括标题文字，按钮
+	- clear content,title and button.
 
-	>_dialog.title('标题').clear().content('内容', 20);
-- input - 添加输入框内容
-	- param p_attr[object || string]input输入框的属性，默认为id
-	- param p_label[string]label文字
-	- param p_input[boolean]true为textarea，false为input
-	- param p_enter[function]在输入框中按下回车执行的回调方法
-	- return this
-	- 特殊的content方法，直接生成input输入框或者textarea输入区域
+	>_dialog.title('This is title').clear().title('a New title');
 
-	>_dialog.input('input_id', 'label文字：', false, function () {sure();});
-- button - 添加按钮
-	- param p_set[object || string || function]关于按钮的设置
-		- name[string]按钮文字，默认为‘确认’，当p_set为string类型时则替换
-		- cls[string]按钮class，默认为conf中的按钮class
-		- id[string]按钮id，默认为空
-		- events[function]按钮的点击触发的事件，默认为关闭对话框，当p_set为function类型时则替换
+- input - add a input push in content.
+	- param p_attr[object || string] setting the input of attributes, id is default attribute if a string type of parameter.
+	- param p_label[string] the label for input.
+	- param p_input[boolean] it's true if you want to add a textarea not input.
+	- param p_enter[function] callback the function when enter in the input.
 	- return this
-	- 添加一个按钮，指定按钮的文字，class，id及click事件要执行的方法
+	- It's a special method that wrapped content for input.
 
-	>_dialog.input('请输入内容', {id: 'content'}, false).button(function () {//submit});
-- tip - 设置提示
-	- param p_tip[string]提示文字
+	>_dialog.input('input_id', 'username：', false, function () {sure();});
+
+- button - add a button push in the bottom.
+	- param p_set[object || string || function] configuring the button.
+		- name[string] button of text, default is 'Ok'.
+		- cls[string] button of class, default is conf.btnCls.
+		- id[string] button of id, default is null.
+		- events[function] to run the function when click corresponding button. Default is closing dialog.
 	- return this
-	- 设置对话框的提示信息文字
+	- To add a button and set its text,class,id and event on click.
+
+	>_dialog.input('please input text', {id: 'content'}, false).button(function () {//submit});
+
+- tip - setting tip.
+	- param p_tip[string] tip of text.
+	- return this
+	- setting a text for dialog in bottom.
 	
-	>_dialog.input('请输入内容', {id: 'content'}, false).button(function () {_dialog.tip('内容有误')});
-- show - 显示对话框
+	>_dialog.input('please input text', {id: 'content'}, false).button(function () {_dialog.tip('content is error!')});
+
+- show - to show dialog.
 	- param null
 	- return this
-	- 显示对话框，包括背景
+	- To show dialog and background.
 
 	>_dialog.show();
-- hide - 隐藏对话框
-	- param null
-	- return this
-	- 隐藏对话框，包括背景
 
-	>_dialog.button({name: '关闭', events: function () {_dialog.hide();}).show();
-- lock - 锁住对话框
+- hide - to hide dialog
 	- param null
 	- return this
-	- 锁定模拟锁，使方法失效
+	- To hide dialog and background.
+
+	>_dialog.button({name: 'close', events: function () {_dialog.hide();}).show();
+
+- lock - to lock dialog.
+	- param null
+	- return this
+	- to lock dialog and prevent any operations.
 
 	>_dialog.lock();
-- unlock - 解锁对话框
+
+- unlock - to unlock dialog
 	- param null
 	- return this
-	- 解除模拟锁，与lock相对
+	- to unlock dialog and cancel lock.
 
 	>_dialog.unlock();
-- size - 设置尺寸
-	- param p_w[number]对话框的宽度
-	- param p_h[number]对话框的高度
-	- param p_t[number]对话框的顶部距离
-	- param p_l[number]对话框的左侧距离
-	- param p_timeout[number]改变尺寸的动画时间，0则直接改变，单位ms毫秒
-	- param p_callback[function]改变尺寸完成后执行的回调函数，参考jQuery.fn.animate
+
+- size - setting size
+	- param p_w[number]dialog of width.
+	- param p_h[number]dialog of height.
+	- param p_t[number]dialog of top.
+	- param p_l[number]dialog of left.
+	- param p_timeout[number]the animation of duration for resize. Zero indicate direction and its unit is milliseconds.
+	- param p_callback[function] the function will be ran after animation has finished.refer to `jQuery.fn.animate`.
 	- return this
-	- 设置对话框的尺寸，包括宽高顶左侧的尺寸，可以指定时间以动画形式完成尺寸的改变, 各种数值大于1时单位为px，小于等于1且大于0时单位为%，0则为auto自动
+	- To set dialog of size including width,height,top and left.And it can set a timeout for animation. The unit is percent if it less than 1. Then unit is pixel if it greater than 1. But the value is `auto` if it's 0. 
 
 	>_dialog.lock().size(400, 0, 200, 0.5, 1000, function () {_dialog.unlock();});
 
-### Example ###
+##### Example #####
 
 ```js
-var _dialog = $.dialog().init().title('标题').content('内容');
+var _dialog = $.dialog().init().title('title').content('please click ok');
 _dialog.button({
-	name: '按钮1',
-	cls: 'className',
-	id: 'idSelect',
+	name: 'ok',
+	cls: 'one_button',
+	id: 'theButton',
 	events: function () {
 		_dialog.lock().size(200, 0, 100, 0.5, 1000, function () {
 			_dialog.unlock();
+		});
 	});
 }).show();
 ```
 
-### Demo ###
+##### Demo #####
 
 [http://www.tychio.net/dialog/](http://www.tychio.net/dialog/ 'dialog demo')
 
-### Unit ###
+##### Test #####
 
 [![Build Status](https://travis-ci.org/tychio/dialog.png?branch=master)](https://travis-ci.org/tychio/dialog)
