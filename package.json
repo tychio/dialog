@@ -3,7 +3,8 @@
     "version": "2.0.1",
     "devDependencies": {
         "grunt": "*",
-        "grunt-contrib-jasmine": "*"
+        "grunt-contrib-jasmine": "*",
+        "grunt-contrib-uglify": "*"
     },
     "scripts": {
         "test": "grunt jasmine:test"

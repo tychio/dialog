@@ -9,9 +9,17 @@ module.exports = function (grunt) {
                     vendor: 'demo/jquery.min.js'
                 }
             }
+        },
+        uglify: {
+            compile: {
+                files: {
+                    'dialog.min.js': 'dialog.js'
+                }
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('default', ['jasmine']);
+    grunt.registerTask('default', ['jasmine', 'uglify']);
 };
