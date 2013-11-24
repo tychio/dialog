@@ -16,10 +16,18 @@ module.exports = function (grunt) {
                     'dialog.min.js': 'dialog.js'
                 }
             }
+        },
+        stylus: {
+            compile: {
+                files: {
+                    'demo/dialog.css': 'build/style/demo.styl'
+                }
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-stylus');
 
-    grunt.registerTask('default', ['jasmine', 'uglify']);
+    grunt.registerTask('default', ['jasmine', 'uglify', 'stylus']);
 };

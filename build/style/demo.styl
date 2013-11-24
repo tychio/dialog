@@ -1,0 +1,103 @@
+$prefix = webkit moz ms o
+prefix(p_attr, argu...)
+    for $pf in $prefix
+        -{$pf}-{p_attr} argu
+    {p_attr} argu
+
+$fontSize = 16px
+$dialogPadding = 5px
+$lineHeight = 18px
+$closeSize = 16px
+$labelWidth = 80px
+$buttonWidth = 60px
+$checkboxMargin = 3px
+$inputPadding = 2px
+$bottomPadding = 4px
+
+$theme = #222222
+body
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+    overflow hidden
+    font-size $fontSize
+.unselect
+    prefix(user-select,none)
+.dialog
+    background $theme
+    border 1px solid darken($theme, 30%)
+    color invert($theme)
+    padding-bottom $dialogPadding
+    .dialog-title
+        height $lineHeight
+        margin $lineHeight*0.1
+        padding $dialogPadding
+        font-size $lineHeight*0.9
+        background lighten($theme, 5%)
+        a
+            display block
+            float right
+            height $closeSize
+            width $closeSize
+            background darken($theme, 5%)
+            cursor pointer
+            &:hover
+                background lighten($theme, 30%)
+    .dialog-content
+        padding $dialogPadding $dialogPadding*2
+    .dialog-bar
+        font-size $fontSize*0.7
+        label
+            display inline-block
+            width $labelWidth
+        textarea
+            display block
+            width 99%
+            height $lineHeight*2
+            line-height $lineHeight
+            font-size $fontSize*0.7
+            border 0
+            outline 0
+            resize none
+            background invert($theme)
+            color $theme
+        input[type="checkbox"]
+            vertical-align middle
+            width $lineHeight + $checkboxMargin
+            height $lineHeight + $checkboxMargin
+            line-height $lineHeight + $checkboxMargin
+            margin $checkboxMargin
+        input[type="text"],
+        input[type="password"]
+            height $lineHeight - $inputPadding
+            line-height $lineHeight - $inputPadding
+            width 60%
+            padding $inputPadding $dialogPadding
+    .dialog-bottom
+        padding $dialogPadding $dialogPadding*2
+        text-align right
+        .dialog-tip
+            display inline-block
+            float left
+            width 50%
+            height $lineHeight - $bottomPadding
+            padding $bottomPadding $dialogPadding
+            text-align left
+        .dialog-button
+            width $buttonWidth
+            height $lineHeight - $bottomPadding
+            padding $bottomPadding 2%
+            margin-left $dialogPadding
+            font-size $fontSize*0.7
+            text-align center
+            cursor pointer
+            background lighten($theme, 15%)
+        a.dialog-button,
+        a.dialog-button link,
+        a.dialog-button:visited
+            color invert($theme)
+            :hover
+                color lighten(invert($theme), 20%)
+                background lighten($theme, 30%)

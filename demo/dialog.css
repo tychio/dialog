@@ -1,1 +1,17 @@
-body{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden}.unselect{user-select:none;-webkit-user-select:none;-moz-user-select:none;-o-user-select:none;-ms-user-select:none}.dialog{background:#222;border:1px solid #000;color:#bbb;padding-bottom:5px}.dialog-title{height:18px;margin:2px;padding:5px;font-size:16px;background:#2f2f2f}.dialog-title a{display:block;float:right;height:16px;width:16px;background:#151515;cursor:pointer}.dialog-title a:hover{background:#6f6f6f}.dialog-content{padding:5px 10px}.dialog-bar{font-size:12px}.dialog-bar label{display:inline-block;width:80px}.dialog-bar textarea{display:block;width:99%;height:36px;line-height:18px;font-size:12px;border:0;outline:0;resize:none;background:#bbb;color:#222}.dialog-bar input[type="checkbox"]{vertical-align:middle;width:20px;height:20px;line-height:20px;margin:3px}.dialog-bar input[type="text"],.dialog-bar input[type="password"]{height:16px;line-height:16px;width:60%;padding:2px 5px}.dialog-bottom{padding:5px 10px;text-align:right}.dialog-tip{display:inline-block;float:left;width:50%;height:14px;padding:4px 5px;text-align:left}.dialog-button{width:60px;height:14px;padding:4px 2%;margin-left:5px;font-size:12px;text-align:center;cursor:pointer;background:#3c3c3c}a.dialog-button,a.dialog-button:link,a.dialog-button:visited{color:#bbb}a.dialog-button:hover{color:#eee;background:#626262}
+body{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;font-size:16px}
+.unselect{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none}
+.dialog{background:#222;border:1px solid #181818;color:#ddd;padding-bottom:5px;}
+.dialog .dialog-title{height:18px;margin:1.8px;padding:5px;font-size:16.2px;background:#2d2d2d;}
+.dialog .dialog-title a{display:block;float:right;height:16px;width:16px;background:#202020;cursor:pointer;}
+.dialog .dialog-title a:hover{background:#646464}
+.dialog .dialog-content{padding:5px 10px}
+.dialog .dialog-bar{font-size:11.2px;}
+.dialog .dialog-bar label{display:inline-block;width:80px}
+.dialog .dialog-bar textarea{display:block;width:99%;height:36px;line-height:18px;font-size:11.2px;border:0;outline:0;resize:none;background:#ddd;color:#222}
+.dialog .dialog-bar input[type="checkbox"]{vertical-align:middle;width:21px;height:21px;line-height:21px;margin:3px}
+.dialog .dialog-bar input[type="text"],.dialog .dialog-bar input[type="password"]{height:16px;line-height:16px;width:60%;padding:2px 5px}
+.dialog .dialog-bottom{padding:5px 10px;text-align:right;}
+.dialog .dialog-bottom .dialog-tip{display:inline-block;float:left;width:50%;height:14px;padding:4px 5px;text-align:left}
+.dialog .dialog-bottom .dialog-button{width:60px;height:14px;padding:4px 2%;margin-left:5px;font-size:11.2px;text-align:center;cursor:pointer;background:#434343}
+.dialog .dialog-bottom a.dialog-button,.dialog .dialog-bottom a.dialog-button link,.dialog .dialog-bottom a.dialog-button:visited{color:#ddd;}
+.dialog .dialog-bottom a.dialog-button :hover,.dialog .dialog-bottom a.dialog-button link :hover,.dialog .dialog-bottom a.dialog-button:visited :hover{color:#e4e4e4;background:#646464}

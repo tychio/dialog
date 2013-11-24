@@ -4,7 +4,8 @@
     "devDependencies": {
         "grunt": "*",
         "grunt-contrib-jasmine": "*",
-        "grunt-contrib-uglify": "*"
+        "grunt-contrib-uglify": "*",
+        "grunt-contrib-stylus": "*"
     },
     "scripts": {
         "test": "grunt jasmine:test"
