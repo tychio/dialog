@@ -21,7 +21,7 @@ describe('Dialog', function () {
         dialog.init();
     });
     afterEach(function () {
-        // $(selector.con).remove();
+        $(selector.con).remove();
         $(selector.bgCls).remove();
     });
     describe('Initialization and getting API', function () {
